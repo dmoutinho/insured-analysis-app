@@ -1,0 +1,30 @@
+{
+  "name": "insured-analysis-app",
+  "version": "1.0.0",
+  "description": "Automatic insured analysis.",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha ./test/init.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dmoutinho/insured-analysis-app.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "dmoutinho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dmoutinho/insured-analysis-app/issues"
+  },
+  "homepage": "https://github.com/dmoutinho/insured-analysis-app#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.0.2"
+  }
+}
