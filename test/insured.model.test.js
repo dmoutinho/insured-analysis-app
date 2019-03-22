@@ -13,7 +13,7 @@ function decYears(date,years) {
 describe('insured.model.test.js', function() {
     describe('check age', function() {
         it('should return 15 years', function(done) {
-               let insured = new Insured({
+            let insured = new Insured({
                 birthday : dateStr(decYears(new Date(),15)),
                 document : "99999999999"
             });
@@ -23,7 +23,7 @@ describe('insured.model.test.js', function() {
     });
     describe('check teenager', function() {
         it('should return teenager', function(done) {
-               let insured = new Insured({
+            let insured = new Insured({
                 birthday : dateStr(decYears(new Date(),15)),
                 document : "99999999999"
             });
@@ -33,7 +33,7 @@ describe('insured.model.test.js', function() {
     });
     describe('check not teenager', function() {
         it('should return not teenager', function(done) {
-               let insured = new Insured({
+            let insured = new Insured({
                 birthday : dateStr(decYears(new Date(),18)),
                 document : "99999999999"
             });
@@ -43,7 +43,7 @@ describe('insured.model.test.js', function() {
     });
     describe('check teenager', function() {
         it('should return younger', function(done) {
-               let insured = new Insured({
+            let insured = new Insured({
                 birthday : dateStr(decYears(new Date(),25)),
                 document : "99999999999"
             });
@@ -53,7 +53,7 @@ describe('insured.model.test.js', function() {
     });
     describe('check not younger', function() {
         it('should return not younger', function(done) {
-               let insured = new Insured({
+            let insured = new Insured({
                 birthday : dateStr(decYears(new Date(),30)),
                 document : "99999999999"
             });
@@ -63,7 +63,7 @@ describe('insured.model.test.js', function() {
     });
     describe('check valid document', function() {
         it('should return valid document', function(done) {
-               let insured = new Insured({
+            let insured = new Insured({
                 birthday : dateStr(decYears(new Date(),35)),
                 document : "99999999998"
             });
@@ -73,7 +73,7 @@ describe('insured.model.test.js', function() {
     });
     describe('check invalid document', function() {
         it('should return invalid document', function(done) {
-               let insured = new Insured({
+            let insured = new Insured({
                 birthday : dateStr(decYears(new Date(),35)),
                 document : "99999999999"
             });
@@ -83,17 +83,32 @@ describe('insured.model.test.js', function() {
     });
     describe('check analysis', function() {
         it('should return analysis', function(done) {
-               let insured = new Insured({
+            let insured = new Insured({
                 birthday : dateStr(decYears(new Date(),25)),
                 document : "99999999997"
             });
-            console.log(insured.analyze());
-            assert.ok(insured.analyze()===1);
+            assert.equal(insured.analyze().status,insured.STATUS_ENUM.ANALYSIS);
             done();
         });
     });
-    // ANALYSIS : 1,
-	// APROVED : 2, 
-	// DECLINED : 3
-
+    describe('check approved', function() {
+        it('should return approved', function(done) {
+            let insured = new Insured({
+                birthday : dateStr(decYears(new Date(),30)),
+                document : "99999999997"
+            });
+            assert.equal(insured.analyze().status,insured.STATUS_ENUM.APROVED);
+            done();
+        });
+    });
+    describe('check declined', function() {
+        it('should return declined', function(done) {
+            let insured = new Insured({
+                birthday : dateStr(decYears(new Date(),30)),
+                document : "99999999999"
+            });
+            assert.equal(insured.analyze().status,insured.STATUS_ENUM.DECLINED);
+            done();
+        });
+    });
 });

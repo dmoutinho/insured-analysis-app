@@ -32,19 +32,33 @@ const STATUS_ENUM = Object.freeze({
 });
 Insured.prototype.STATUS_ENUM = STATUS_ENUM;
 
+// Insured.prototype.analyze = function() {
+// 	let result = STATUS_ENUM.ANALYSIS;
+
+//     console.log(result);
+//     let isAproved = !this.isTeenager() && !this.isYounger() && this.validateDocument(); 
+//     console.log(isAproved);
+//     let isDeclined = !this.validateDocument(); 
+//     console.log(isDeclined);
+
+//     if(isAproved) {
+//         result = STATUS_ENUM.APROVED;
+//     } else if(isDeclined) {
+//         result = STATUS_ENUM.DECLINED;
+//     } else 
+
+//     console.log(result);
+//     return result;
+// };
+
 Insured.prototype.analyze = function() {
-	let result = STATUS_ENUM.ANALYSIS;
-
-    let isAproved = !this.isTeenager() && !this.isYounger() && this.validateDocument(); 
-    let isDeclined = this.validateDocument(); 
-
-    if(isAproved) {
-        result = STATUS_ENUM.APROVED;
-    } else if(isDeclined) {
-        result = STATUS_ENUM.DECLINED;
-    } else 
-
-    return result;
+    if(!this.isTeenager() && !this.isYounger() && this.validateDocument()) {
+        return { status : STATUS_ENUM.APROVED };
+    } else if(!this.validateDocument()) {
+        return { status : STATUS_ENUM.DECLINED };
+    } else {
+        return { status : STATUS_ENUM.ANALYSIS };
+    }
 };
 
 module.exports = Insured;
