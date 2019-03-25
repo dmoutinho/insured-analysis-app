@@ -1,6 +1,6 @@
 const assert = require('assert');
 const request = require('request');
-const apiEndpoint = require('../../server').apiEndpoint;
+const appEndpoint = require('../../server').appEndpoint;
 const message = require('../../app/utils/message.utils.js');
 const Insured = require('../../app/models/insured.model');
 
@@ -20,7 +20,7 @@ describe('analysis api', function() {
                 birthday : dateStr(decYears(new Date(),25)),
                 document : "99999999997"
             });
-            request.put(apiEndpoint+'/analysis', { json : ins }, (err, res, body) => {
+            request.put(appEndpoint+'/analysis', { json : ins }, (err, res, body) => {
                 if (err) assert.fail(err);
                 assert.equal(body.status,ins.STATUS_ENUM.ANALYSIS);
                 assert.equal(res.statusCode,200);
@@ -34,7 +34,7 @@ describe('analysis api', function() {
                 birthday : dateStr(decYears(new Date(),30)),
                 document : "99999999997"
             });
-            request.put(apiEndpoint+'/analysis', { json : ins }, (err, res, body) => {
+            request.put(appEndpoint+'/analysis', { json : ins }, (err, res, body) => {
                 if (err) assert.fail(err);
                 assert.equal(body.status,ins.STATUS_ENUM.APROVED);
                 assert.equal(res.statusCode,200);
@@ -48,7 +48,7 @@ describe('analysis api', function() {
                 birthday : dateStr(decYears(new Date(),30)),
                 document : "99999999999"
             });
-            request.put(apiEndpoint+'/analysis', { json : ins }, (err, res, body) => {
+            request.put(appEndpoint+'/analysis', { json : ins }, (err, res, body) => {
                 if (err) assert.fail(err);
                 assert.equal(body.status,ins.STATUS_ENUM.DECLINED);
                 assert.equal(res.statusCode,200);
